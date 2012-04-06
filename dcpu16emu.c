@@ -1,5 +1,5 @@
 /* dcpu16asm.c - Emulator for the DCPU-16 CPU
-   version 1, 6 April 2012
+   version 2, 6 April 2012
 
    Copyright (C) 2012 Karl Hobley
 
@@ -221,13 +221,14 @@ int main(int argc, char* argv[])
 	
 	/* Initialise CPU */
 	memset(&cpu, 0, sizeof(struct dcpu16));
+	cpu.sp = 0xFFFF;
 	
 	/* Read words into RAM */
 	fread(cpu.ram, 2, 0x100000, input);
 	
 	/* Run */
 	for (;;) {
-		printf("\nA: %u, B: %u, C: %u, X: %u, Y: %u, Z: %u, I: %u, J: %u, PC: %u, SP: %u, O: %u\n", cpu.a, cpu.b, cpu.c, cpu.x, cpu.y, cpu.z, cpu.i, cpu.j, cpu.pc, cpu.sp, cpu.o);
+		printf("\nA: %04X, B: %04X, C: %04X, X: %04X, Y: %04X, Z: %04X, I: %04X, J: %04X, PC: %04X, SP: %04X, O: %04X\n", cpu.a, cpu.b, cpu.c, cpu.x, cpu.y, cpu.z, cpu.i, cpu.j, cpu.pc, cpu.sp, cpu.o);
 		run_instruction();
 	}
 
